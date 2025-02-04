@@ -1,0 +1,125 @@
+﻿@model HeartSpace.Models.LoginViewModel
+
+@{
+    ViewBag.Title = "登入";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .text-danger ul {
+        list-style: none; /* 移除列表符號 */
+        padding-left: 0; /* 去除內縮 */
+        margin: 10px 0; /* 設定上下邊距 */
+        text-align: center; /* 文字置中 */
+    }
+
+        .text-danger ul li {
+            margin-bottom: 5px; /* 控制項目間距 */
+        }
+
+    .login-container {
+        min-height: 50vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .login-card {
+        max-width: 400px;
+        width: 100%;
+        border-radius: 10px;
+    }
+
+    .brand-header {
+        background-color: #d7ceb2;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+    }
+
+        .brand-header h1 {
+            margin-bottom: 0;
+        }
+
+        .brand-header h2 {
+            font-size: 1.25rem;
+        }
+</style>
+
+@if (!string.IsNullOrEmpty(ViewBag.message))
+{
+
+    <div class="container mt-3">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <!-- 提示框寬度設為 50%（12 格中的 6 格） -->
+                <div class="alert alert-success text-center">
+                    @ViewBag.message
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+}
+
+
+<div class="container login-container">
+
+    <div class="position-fixed bottom-0 start-0 p-3"
+
+        <p>測試帳號：11111</p>
+        <p>測試密碼：Aa111111</p>
+
+        <p>管理員帳號：77777</p>
+        <p>管理員密碼：Aa777777</p>
+
+        <p>停用帳號：22222</p>
+        <p>停用密碼：Aa222222</p>
+
+
+    </div>
+
+    <div class="card p-4 shadow login-card md-4">
+
+        <div class="brand-header mb-3">
+            <h1 class="mb-0">心聚點</h1>
+            <h2 class="fs-5">HeartSpace</h2>
+        </div>
+        @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+        {
+
+            @Html.AntiForgeryToken()
+
+            <div class="mb-3">
+                <label for="Account" class="form-label">帳號</label>
+                @Html.TextBoxFor(m => m.Account, new { @class = "form-control", placeholder = "請輸入帳號", id = "Account" })
+                @Html.ValidationMessageFor(m => m.Account, "", new { @class = "text-danger" })
+            </div>
+            <div class="mb-3">
+                <label for="Password" class="form-label">密碼</label>
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "請輸入密碼", id = "Password" })
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+            </div>
+            <div class="align-content-center">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" }) @* 顯示所有錯誤訊息 *@
+            </div>
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary">登入</button>
+            </div>
+        }
+        <div class="text-center mt-3">
+            <a href="@Url.Action("Register", "Account")" class="text-decoration-none">我要註冊</a>
+        </div>
+    </div>
+
+
+    <div class="md-4">
+
+
+
+
+    </div>
+
+
+</div>

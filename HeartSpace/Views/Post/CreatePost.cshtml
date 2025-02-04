@@ -1,0 +1,193 @@
+﻿@model HeartSpace.Models.DTOs.CreatePostDto
+
+@{
+    ViewBag.Title = "發佈貼文 <i class='fa-solid fa-feather'></i>";
+}
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+
+        .section-title {
+            background-color: #fdd9a0;
+            text-align: center;
+            padding: 10px;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .form-section {
+            background-color: #ffffff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+            .form-section label {
+                font-weight: bold;
+            }
+
+        .btn-submit {
+            background-color: #fdd9a0;
+            color: black;
+            font-weight: bold;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+
+            .btn-submit:hover {
+                background-color: #fcb874;
+            }
+
+        .text-danger {
+            color: red;
+            font-size: 14px;
+        }
+
+        .is-invalid {
+            border-color: red !important;
+            background-color: #ffe6e6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="section-title">發佈貼文</div>
+
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success">
+                @TempData["SuccessMessage"]
+            </div>
+        }
+
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="alert alert-danger">
+                發佈失敗，請檢查輸入內容！
+            </div>
+        }
+
+        @using (Html.BeginForm("CreatePost", "Post", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-section">
+                <label for="Title" class="form-label">標題 <span class="text-danger">*</span>：</label>
+                @Html.TextBoxFor(m => m.Title, new { @class = "form-control", placeholder = "請輸入貼文標題", @id = "Title" })
+                <span class="text-danger" id="TitleError"></span>
+            </div>
+
+            <div class="form-section">
+                <label for="Image" class="form-label">上傳圖片：</label>
+                <input type="file" name="Image" id="Image" class="form-control" accept="image/*" />
+            </div>
+
+            <div class="form-section">
+                <label for="CategoryId" class="form-label">分類 <span class="text-danger">*</span>：</label>
+                @Html.DropDownListFor(
+                    m => m.CategoryId,
+                    ViewBag.Categories as IEnumerable<SelectListItem>,
+                    "請選擇分類",
+                    new { @class = "form-control", @id = "CategoryId" })
+                <span class="text-danger" id="CategoryError"></span>
+            </div>
+
+            
+
+
+            <div class="form-section">
+                <label for="PostContent" class="form-label">內文 <span class="text-danger">*</span>：</label>
+                @Html.TextAreaFor(m => m.PostContent, new { @class = "form-control", rows = 5, placeholder = "請輸入貼文內文", @id = "PostContent" })
+                <span class="text-danger" id="ContentError"></span>
+                <div class="text-muted" id="ContentCharCount">0/500</div>
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-submit">確認送出貼文</button>
+            </div>
+        }
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // 取得輸入框元素
+            const titleInput = document.getElementById("Title");
+            const categoryInput = document.getElementById("CategoryId");
+            const contentInput = document.getElementById("PostContent");
+            const maxContentLength = 500;
+
+            // 錯誤訊息元素
+            const titleError = document.getElementById("TitleError");
+            const categoryError = document.getElementById("CategoryError");
+            const contentError = document.getElementById("ContentError");
+            const contentCharCount = document.getElementById("ContentCharCount");
+
+            // 驗證標題
+            function validateTitle() {
+                const value = titleInput.value.trim();
+                if (!value) {
+                    titleError.textContent = "標題為必填";
+                    titleInput.classList.add("is-invalid");
+                } else if (value.length > 20) {
+                    titleError.textContent = "標題不可超過 20 字";
+                    titleInput.classList.add("is-invalid");
+                } else {
+                    titleError.textContent = "";
+                    titleInput.classList.remove("is-invalid");
+                }
+            }
+
+            // 驗證分類
+            function validateCategory() {
+                if (!categoryInput.value) {
+                    categoryError.textContent = "請選擇分類";
+                    categoryInput.classList.add("is-invalid");
+                } else {
+                    categoryError.textContent = "";
+                    categoryInput.classList.remove("is-invalid");
+                }
+            }
+
+            // 驗證內文
+            function validateContent() {
+                const value = contentInput.value.trim();
+                contentCharCount.textContent = `${value.length}/${maxContentLength}`;
+                if (!value) {
+                    contentError.textContent = "內文為必填";
+                    contentInput.classList.add("is-invalid");
+                } else if (value.length > maxContentLength) {
+                    contentError.textContent = `內文不可超過 ${maxContentLength} 字`;
+                    contentInput.classList.add("is-invalid");
+                } else {
+                    contentError.textContent = "";
+                    contentInput.classList.remove("is-invalid");
+                }
+            }
+
+            // 監聽事件
+            titleInput.addEventListener("blur", validateTitle);
+            titleInput.addEventListener("input", validateTitle);
+
+            categoryInput.addEventListener("blur", validateCategory);
+
+            contentInput.addEventListener("blur", validateContent);
+            contentInput.addEventListener("input", validateContent);
+        });
+    </script>
+</body>
+</html>
