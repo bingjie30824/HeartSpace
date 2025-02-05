@@ -34,18 +34,21 @@
 ## 🖼️ **畫面截圖**
 
 ### 使用者介面：
-- **首頁**
-<img src="https://private-user-images.githubusercontent.com/191953724/409538709-2c263e0b-db6b-4f62-8a13-e14d4a87a9f0.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3Mzg2NzA4MzMsIm5iZiI6MTczODY3MDUzMywicGF0aCI6Ii8xOTE5NTM3MjQvNDA5NTM4NzA5LTJjMjYzZTBiLWRiNmItNGY2Mi04YTEzLWUxNGQ0YTg3YTlmMC5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjUwMjA0JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI1MDIwNFQxMjAyMTNaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT02Njg5Nzk5NDJjMzBjNWJlZDZmMzY1ODg4ZTQyNzdhYTk0Mzc3YThkZTQxYzljODIxZjAyNjFlMGY1YmQ1ZjdiJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.t6m8xp1bMjR3CLthTXMPdLcv4mgdI4SS5S4oRe_oZVk" alt="描述文字" width="500">
+
+- **搜尋功能**：用戶可透過發起人、標題或類別進行關鍵字搜尋，快速找到相關貼文或活動。  
+  <img src="screenshot/searching.gif" alt="searching" width="400"> 
+
+- **活動**：用戶可發起活動，並進行內容編輯或刪除操作。  
+  <img src="screenshot/editevent.gif" alt="editevent" width="400"> 
+
+- **出缺席管理**：活動發起人可管理參與者的出席狀態。  
+  <img src="screenshot/eventstatus.gif" alt="eventstatus" width="400"> 
 
 
-- **搜尋**：HTML、CSS (Bootstrap 5)、jQuery、AJAX
-- **貼文**：MySQL
-- **活動**：三層式架構、介面、依賴注入
-- **ORM 工具**：Dapper、Entity Framework
-- **版本控制**：Git
-
-- 
 ### 後台管理系統：
+- **用戶、活動及貼文管理**：管理者可編輯或停權用戶，並對活動、貼文及留言進行檢視或刪除操作，確保平台內容合規。  
+  <img src="screenshot/disablecomment.gif" alt="disablecomments" width="400">
+
 
 ---
 
@@ -68,4 +71,20 @@
    - 前台：http://localhost:44344
    - 後台：http://localhost:7075  
    - 圖庫：http://localhost:44378
+
+---
+
+### 未來精進方向
+
+1. **功能擴展**
+   - 提供一鍵分享功能，讓用戶可以將活動分享到 Facebook、Instagram、Twitter 等社交媒體，增加活動曝光度，吸引更多參與者。
+   - 增加更高級的搜尋過濾條件，例如地理位置篩選或日期篩選功能。
+   - 增加「熱門活動」和「最新活動」排行榜，按參與人數或瀏覽收藏次數進行排序，幫助用戶快速找到受歡迎的活動。
+   - 支援活動的多媒體功能，例如圖片集或影片上傳。
+
+2. **後台管理提升**
+   - 引入數據可視化儀表板，幫助管理者快速了解用戶和活動數據。
+   - 支援批量操作，例如批量停權用戶或刪除貼文。
+   - 增強安全性措施，實現更細緻的權限管理。
+
 
