@@ -1,7 +1,7 @@
 # 心聚點 HeartSpace
 
 **社群服務網站**  
-由 3 人團隊開發，使用 **ASP.NET MVC 5**、**ASP.NET Core MVC** 和 **MySQL**。  
+由 3 人團隊開發，使用 **ASP.NET MVC 5**、**ASP.NET Core MVC** 和 **MSSQL**。  
 網站提供使用者發布貼文、發起或報名活動，並支援關鍵字搜尋。  
 另設有後台管理系統，供管理員管理使用者、貼文及活動。
 
@@ -23,7 +23,7 @@
 ## 🛠️ **技術細節**
 - **後端技術**：ASP.NET MVC 5、ASP.NET Core MVC
 - **前端技術**：HTML、CSS (Bootstrap 5)、jQuery、AJAX
-- **資料庫**：MySQL
+- **資料庫**：MSSQL
 - **系統架構**：三層式架構、介面、依賴注入
 - **ORM 工具**：Dapper、Entity Framework
 - **版本控制**：Git
@@ -61,7 +61,7 @@
    cd HeartSpace
 2. **初始化資料庫**：
    - 將 `db/init-database.sql` 檔案匯入資料庫以建立資料表和預設資料。
-   - 使用 MySQL Workbench 或其他資料庫工具執行 SQL 檔案。
+   - 使用 MSSQL Workbench 或其他資料庫工具執行 SQL 檔案。
 3. **設定資料庫連線資訊**：  
    - 編輯專案中的 Web.config 或 appsettings.json 文件，填寫資料庫連線資訊
 4. **啟動專案**：  
